@@ -28,14 +28,25 @@ First line will provide the quantity of petrol (separated by space) that can be 
    Output: 335
 '''
 
+#Function To Calaculate Difference Between Two Least Combinations
 def calc(lst):
     s = sum(lst)
     n = len(lst)-1
+
+    #Table to Store Results, So That Same Result is Not Calculated Again and Again
+    #In Table There are n (Size of List) number of Rows
+    #In Table There is Column for Every Possible Sum of List up to Max Sum
     dp = [[0 for i in range(s+1)] for j in range(n+1)]
+    
+    #Initializing First Column True
     for i in range(n+1):
         dp[i][0] = True
+    
+    #Initializing Columns of First Row as False
     for j in range(s+1):
         dp[0][j] = False
+    
+    #Itterating Through Table
     for i in range(n+1):
         for j in range(s+1):
             dp[i][j] = dp[i-1][j]
@@ -49,6 +60,10 @@ def calc(lst):
 
 lst = list(map(int, input().split(' ')))
 diff = calc(lst)
+
+#Least Sum From Two Combinations
 min_p = (sum(lst)-diff)//2
+
+#Largest Sum From Two Combination
 max_p = min_p + diff
-print(diff)
+print(max_p)

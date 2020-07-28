@@ -36,22 +36,34 @@ Where luck L is defined as L1/L2. Other numbers are, as described above.
     RIP
 '''
 from math import gcd, factorial
+
+#Function to Calculate nCr
 def nCr(n,r):
     return (factorial(n))//(factorial(n-r)*factorial(r))
 
+#a = Attack, h = Health, l1 = Luck, l2 = Luck, m = Number of Seconds, c = Special Power Boost
 for _ in range(int(input())):
     a,h,l1,l2,m,c = map(int, input().split(" "))
     numerator = 0
     denominator = pow(l2,m)
+    
+    #If Nomu Can't Be Defeated Even After Getting Power Boost, Then We Print RIP
     if m*(a+c) < h:
         print("RIP")
+    
+    #If We Can Defeat Nomu Even Without Power Boost, Then Probablity is 1/1
     elif m*a >=h:
         print("1/1")
+    
     else:
         luck_Req,total_Attack = 0,m*a
+        
+        #To Calculate Number of Power Boost Required
         while total_Attack<h:
             total_Attack += c
             luck_Req += 1
+        
+        #Calculating Each Possibilities
         for i in range(luck_Req, m+1):
             if i==0:
                 numerator += pow(l2-l1,m)
@@ -59,5 +71,7 @@ for _ in range(int(input())):
                 numerator += pow(l1,m)
             else:
                 numerator += (pow(l1,i)*pow(l2-l1,m-i)*nCr(m,i))
+        
+        #Divisor To Make GCD 1
         x = gcd(numerator, denominator)
         print("%s/%s"%(numerator//x,denominator//x))

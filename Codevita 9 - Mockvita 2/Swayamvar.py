@@ -57,12 +57,23 @@ n = int(input())
 b = list(input())
 g = list(input())
 
+#Temporary Bride List
 tmp = b.copy()
+
+#Itterating Through Each Bride
 for i in b:
+    
+    #If Match Exist in Eleigible Groom List
     if i in g:
+        
+        #Remove Him From List
         g.remove(i)
+        #Remove Her From List
         tmp.remove(i)
+    
+    #If No Match is Found Break The Loop
     else:
         break
 
+#Answer is Number of Brides Present in Temporary List
 print(len(tmp))

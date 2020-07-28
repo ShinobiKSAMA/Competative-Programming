@@ -43,23 +43,25 @@ Second line contains N 3-digit integers delimited by space
 
 n = int(input())
 lst = list(map(int, input().split(' ')))
-import time
-now = time.time()
 evenLst =[]
 oddLst = []
 
 #Here, c is Position
 #And i is Element of List
 for c,i in enumerate(lst):
+    
     #Making list of Digits
     dig = [int(x) for x in str(i)]
+    
     #Rule 1
     elestr = list(str((max(dig)*11)+(min(dig)*7)))
+    
     #Here If Number is 3 Digits We Will Take 2nd Digit Else We Will Take 1st Digit 
     if len(elestr)==3:
         ele = elestr[1]
     else:
         ele = elestr[0]
+    
     #Seperating Even and Oddth Position Elements
     if c%2==0:
         evenLst.append(ele)
@@ -70,13 +72,17 @@ j=0
 tmpE = evenLst
 tmpO = oddLst
 for i in evenLst:
+    
     #Counting Occurence of The Digit
     cnt = tmpE.count(i)
+    
     #Deleting All Occurences of That Integers
     tmpE = [x for x in tmpE if x!=i]
+    
     #If Count is 2, One Pair is Possible
     if cnt==2:
         j += 1
+    
     #If Count is More Than 2 We Have to Take Only 2 Pairs Since Rule 2
     elif cnt>2:
         j += 2
@@ -90,5 +96,3 @@ for i in oddLst:
     elif cnt>2:
         j += 2
 print(j)
-end = time.time()
-print(str(end-now)+" Seconds")

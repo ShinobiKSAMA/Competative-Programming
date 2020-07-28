@@ -35,12 +35,15 @@ s = int(input())
 def cPCB(l,b):
     c = 0
     wl,wb = l,b
+    
     #If It Exist in Dictionary
     if (wl,wb) in cD:
         c = cD[(wl,wb)]
+    
     #If Not
     else:
         while(wl!=0 or wb!=0):
+            
             #If New Piece Exist add it in Count
             if (wl,wb) in cD:
                 c += cD[(wl,wb)]
@@ -50,11 +53,13 @@ def cPCB(l,b):
             if (lr%sr==0):
                 c += lr//sr
                 break
+            
             #If New Piece Doesn't Exist Create New Piece
             else:
                 wl = sr
                 wb = lr-sr
                 c += 1
+        
         #Add Non Existing Value in Dictionary
         cD[(l,b)] = c
         cD[(b,l)] = c
